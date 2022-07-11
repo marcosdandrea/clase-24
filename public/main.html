@@ -127,9 +127,10 @@
       }else{
         location.replace("http://localhost:8080/notAllowed.html")
       }
-      setInterval(()=>{
+      const check = setInterval(()=>{
 
         if (!getCookie("username")) {
+          clearInterval(check)
           alert("Su sesión se ha cerrado por inactividad")
           location.replace("http://localhost:8080/notAllowed.html")
         }
