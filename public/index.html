@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="containerLogin">
+        <div class="login">
+            <h2>Ingrese su nombre para iniciar sesión</h2>
+            <input type="text" id="name">
+            <input type="button" value="Ingresar al sitio" onclick=login()>
+        </div>
+    </div>
+    <script>
+        function login() {
+            const username = document.querySelector("#name").value
+            const data = {username}
+            const URL = "http://localhost:8080/login"
+            fetch(URL, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+                .then(res => {
+                    //console.log (res.body.username)
+                    window.location.replace(res.url)
+                })
+        }
+    </script>
+</body>
+
+</html>

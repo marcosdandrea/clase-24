@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
+    integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+  <script src="./scripts/socket.io.min.js"></script>
+  <script src="./scripts/client.min.js"></script>
+  <script src="./scripts/main.js" defer></script>
+  <title>Gestión de Productos</title>
+</head>
+
+<body id="app">
+  <div class="container-fluid d-flex mt-5 mb-5 vw-100 justify-content-center align-items-center">
+    <div class="container">
+      <div class="contenedorHeader">
+        <h2 id="welcome">Bienvenido</h2>
+        <a href="http://localhost:8080/logout" class="btn btn-primary">Cerrar Sesión</a>
+      </div>
+      <h3>Carga de productos</h3>
+      <br>
+      <div class="form">
+        <form method="post" enctype="multipart/form-data">
+          <label for="title" class="form-label">Nombre</label>
+          <div class="input-group mb-3">
+            <input class="form-control" type="text" name="title" id="title">
+          </div>
+          <label for="price" class="form-label">Precio</label>
+          <div class="input-group mb-3">
+            <span class="input-group-text">$</span>
+            <input class="form-control" type="text" name="price" id="price">
+          </div>
+          <div class="mb-3">
+            <label for="formFile" class="form-label progressContainer">Imagen</label>
+            <input class="form-control" type="file" name="image" id="fileImage" accept=".png, .jpg, .jpeg">
+            </input>
+          </div>
+          <div class="d-flex justify-content-end btnContainer">
+            <input type="button" id="btnSubmit" class="btn btn-primary" value="Enviar">
+          </div>
+        </form>
+      </div>
+      <hr>
+      <h3>Listado de Productos</h3>
+      <br>
+      <div id="hbsProducts">
+
+      </div>
+      <hr>
+      <div class="messageForm">
+        <div class="inputContainer">
+          <h3>Centro de Mensajes</h3>
+          <h6 id="compressionRatio"></h6>
+        </div>
+        <div class="inputContainer">
+          <label for="inputEmail">Email</label>
+          <input class="form-control" type="email" name="" id="inputEmail" placeholder="correo@correo.com">
+        </div>
+        <div class="inputContainer">
+          <div class="inputContainer">
+            <label for="inputName">Nombre</label>
+            <input class="form-control" type="text" name="" id="inputName" placeholder="">
+          </div>
+          <div class="inputContainer">
+            <label for="inputSurname">Apellido</label>
+            <input class="form-control" type="text" name="" id="inputSurname" placeholder="">
+          </div>
+          <div class="inputContainer">
+            <label for="inputAge">Edad</label>
+            <input class="form-control" type="number" name="" id="inputAge" placeholder="">
+          </div>
+        </div>
+        <div class="inputContainer">
+          <div class="inputContainer">
+            <label for="inputAlias">Alias</label>
+            <input class="form-control" type="text" name="" id="inputAlias" placeholder="">
+          </div>
+          <div class="inputContainer">
+            <label for="inputAvatarURL">Avatar Image URL</label>
+            <input class="form-control" type="text" name="" id="inputAvatarURL" placeholder="">
+          </div>
+        </div>
+        <div id="hbsMessages">
+
+        </div>
+        <div class="inputContainer">
+          <input class="form-control" type="text" name="" id="inputContent">
+          <button id="btnSendMessage" class="btn btn-primary">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function getCookie(cname) {
+      let name = cname + "=";
+      let decodedCookie = decodeURIComponent(document.cookie);
+      let ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const cookie = getCookie("username")
+      const welcomeMsg = "Bienvenido " + (getCookie("username"))
+
+      document.querySelector("#welcome").textContent = welcomeMsg.toUpperCase()
+      
+      console.log (cookie)
+      if (cookie){
+        document.querySelector("#app").style.display = "block"
+      }else{
+        location.replace("http://localhost:8080/notAllowed.html")
+      }
+      setInterval(()=>{
+
+        if (!getCookie("username")) {
+          alert("Su sesión se ha cerrado por inactividad")
+          location.replace("http://localhost:8080/notAllowed.html")
+        }
+      }, 5000)
+    })
+  </script>
+</body>
+
+</html>

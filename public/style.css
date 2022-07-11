@@ -1,0 +1,89 @@
+td {
+    vertical-align: middle !important;
+}
+
+.thead-dark{
+    background-color: black;
+    color: white;
+}
+
+.messageForm{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.tableContainer {
+    max-height: 70vh;
+    width: 80vw;
+    overflow-y: scroll;
+}
+
+.btnContainer{
+    column-gap: 1rem;
+}
+
+#hbsMessages{
+    max-height: 8rem;
+    overflow: auto;
+}
+
+.messageRow{
+    display: flex;
+    column-gap: 1rem;
+    height: 1.3rem;
+}
+
+.inputContainer{
+    display: flex;
+    column-gap: 1rem;
+}
+
+.messageFrom{
+    color: blue
+}
+
+.messageTime {
+    color: brown
+}
+
+.messageContent{
+    color: green
+}
+
+th, td{
+    text-align: center !important;
+}
+
+.inputContainer{
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.containerLogin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.login{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;    
+}
+
+.contenedorHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    background-color: rgb(223, 223, 223);
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+#app{
+    display: none;
+}
